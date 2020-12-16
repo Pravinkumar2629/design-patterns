@@ -9,7 +9,7 @@
 #include "OpenClosed.h"
 int main(){
 	SingleResponsibility sr;
-	//sr.Run();
+	sr.Run();
 
 	OpenClosed opc;
 	opc.Run();

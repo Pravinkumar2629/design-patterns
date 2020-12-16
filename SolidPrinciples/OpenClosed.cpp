@@ -55,6 +55,62 @@ struct ProductFilter {
 		return ret;
 	}
 };
+//------------------------------------------------------------------------------AFter;
+template<typename T>
+struct Specification{
+	virtual bool is_satisfied(T* spec) = 0;
+	virtual ~Specification(){}
+};
+
+template<typename T>
+struct Filter {
+	virtual std::vector<T*> filter(std::vector<T*> items, Specification<T> &spec) = 0;
+	virtual ~Filter(){}
+};
+
+
+struct ColorSpecification : public Specification<Product> {
+	Color _color;
+	ColorSpecification(Color color){
+		_color = color;
+	}
+	bool is_satisfied(Product *p) override{
+		return p->color == _color;
+	}
+	~ColorSpecification(){}
+};
+
+struct ProductFilterV2 : public Filter<Product>
+{
+	std::vector<Product*> filter(std::vector<Product*> items, Specification<Product> &spec)
+	{
+		std::vector<Product*> itemsRet;
+		for(auto item : items)
+		{
+			if(spec.is_satisfied(item))
+			{
+				itemsRet.push_back(item);
+			}
+		}
+		return itemsRet;
+	}
+	~ProductFilterV2(){	}
+};
+
+
+void ProcessAfterDesignPrinciple() {
+	Product p1{"Apple", Color::GREEN, Size::SMALL};
+	Product p2{"Bike", Color::BLUE, Size::LARGE};
+	Product p3{"Laptop", Color::RED, Size::MEDIUM};
+	auto v = std::vector<Product*>{&p1, &p2, &p3};
+	ProductFilterV2 pfv2;
+	ColorSpecification cspec(Color::RED);
+	for(auto &i : pfv2.filter(v, cspec)){
+		std::cout << "item " << i->name << " is Red" << std::endl;
+	}
+
+}
+
 
 void ProcessBeforeDesignPrinciple() {
 	Product p1{"Apple", Color::GREEN, Size::SMALL};
@@ -70,4 +126,5 @@ void ProcessBeforeDesignPrinciple() {
 
 void OpenClosed::Run() {
 	ProcessBeforeDesignPrinciple();
+	ProcessAfterDesignPrinciple();
 }
