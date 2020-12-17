@@ -70,7 +70,7 @@ struct IScanner {
 	}
 };
 struct IPrinter {
-	virtual void Scan(IDocument&) = 0;
+	virtual void Print(IDocument&) = 0;
 	virtual ~IPrinter() {
 	}
 };

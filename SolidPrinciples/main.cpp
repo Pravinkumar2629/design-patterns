@@ -8,6 +8,9 @@
 #include "SingleResponsibility.h"
 #include "OpenClosed.h"
 #include "LiskovSubstitutionPrinciple.h"
+#include "InterfaceSegragation.h"
+#include "DependencyInversion.h"
+
 int main(){
 	SingleResponsibility sr;
 	sr.Run();
@@ -17,6 +20,12 @@ int main(){
 
 	LiskovSubstitutionPrinciple lsp;
 	lsp.Run();
+
+	InterfaceSegragation isp;
+	isp.Run();
+
+	DependencyInversion dip;
+	dip.Run();
 
 }
 
