@@ -157,7 +157,6 @@ void ProcessAfterDesignPrinciple() {
 	for (auto &i : pfv2.filter(v, andSpec)) {
 		std::cout << "item " << i->name << " is green and Medium" << std::endl;
 	}
-
 }
 
 void ProcessBeforeDesignPrinciple() {

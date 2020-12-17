@@ -7,12 +7,16 @@
 
 #include "SingleResponsibility.h"
 #include "OpenClosed.h"
+#include "LiskovSubstitutionPrinciple.h"
 int main(){
 	SingleResponsibility sr;
 	sr.Run();
 
 	OpenClosed opc;
 	opc.Run();
+
+	LiskovSubstitutionPrinciple lsp;
+	lsp.Run();
 
 }
 
