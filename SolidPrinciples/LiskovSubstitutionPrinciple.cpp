@@ -69,10 +69,8 @@ void TestRectangle(Rectangle &rect) {
 void LiskovSubstitutionPrinciple::Run() {
 	Rectangle r { 5, 6 };
 	Square s { 5 };
-
 	TestRectangle(r);
 	TestRectangle(s);
-
 }
 
 LiskovSubstitutionPrinciple::~LiskovSubstitutionPrinciple() {
