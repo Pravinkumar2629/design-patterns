@@ -14,11 +14,10 @@
 #include <iomanip>
 
 using namespace std;
-
-inline string open_tag(string name) {
+string open_tag(string name) {
 	return "<" + name + "> ";
 }
-inline string close_tag(string name) {
+string close_tag(string name) {
 	return " </" + name + ">";
 }
 
@@ -29,7 +28,8 @@ class HTMLElement {
 
 public:
 	vector<HTMLElement> elements;
-	HTMLElement(const string &name_) :	name(name_), text(""){
+	HTMLElement(const string &name_) :
+			name(name_), text("") {
 	}
 
 	HTMLElement(const string &name_, const string &text_) :
@@ -41,14 +41,14 @@ public:
 		cout << open_tag(name) << endl;
 		for (auto &element : elements) {
 			oss << std::setw(indent_size * indent) << " "
-					<< open_tag(element.name)  << element.text
+					<< open_tag(element.name) << element.text
 					<< close_tag(element.name) << endl;
 		}
 		oss << close_tag(name) << endl;
 		return oss.str();
 	}
 	void add_child(string tag, string text) {
-		HTMLElement element (tag, text);
+		HTMLElement element(tag, text);
 		elements.emplace_back(element);
 	}
 	void Print() {
