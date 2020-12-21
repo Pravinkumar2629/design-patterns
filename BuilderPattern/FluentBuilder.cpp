@@ -86,8 +86,11 @@ public:
 };
 
 void FluentBuilder::Run() {
-	auto element = HTMLElement::create("paragraph").add_child("text",
-			"text One").add_child("text", "text two").add_child("text",
-			"text three").add_child("text", "text four").build();
+	auto element = HTMLElement::create("paragraph")
+			.add_child("text", "text One")
+			.add_child("text", "text two")
+			.add_child("text", "text three")
+			.add_child("text", "text four")
+			.build();
 	std::cout << element.str();
 }
