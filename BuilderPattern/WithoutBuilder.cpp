@@ -13,6 +13,10 @@
 
 
 /*
+ * Pixel is not visible;
+ * */
+
+/*
  * when you want to create an object piece by piece, you will not want to do like below
  *
  * */
