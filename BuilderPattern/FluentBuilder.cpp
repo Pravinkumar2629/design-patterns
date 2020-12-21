@@ -18,11 +18,12 @@ FluentBuilder::~FluentBuilder() {
 #include <iomanip>
 
 using namespace std;
-string open_tag(string name) {
-	return "<" + name + "> ";
+
+inline string open_tag(const string &name) {
+	return string("<" + name + "> ");
 }
-string close_tag(string name) {
-	return " </" + name + ">";
+inline string close_tag(const string &name) {
+	return string(" </" + name + ">");
 }
 
 class HTMLBuilder;
@@ -86,11 +87,8 @@ public:
 };
 
 void FluentBuilder::Run() {
-	auto element = HTMLElement::create("paragraph")
-			.add_child("text", "text One")
-			.add_child("text", "text two")
-			.add_child("text", "text three")
-			.add_child("text", "text four")
-			.build();
+	auto element = HTMLElement::create("paragraph").add_child("text",
+			"text One").add_child("text", "text two").add_child("text",
+			"text three").add_child("text", "text four").build();
 	std::cout << element.str();
 }
