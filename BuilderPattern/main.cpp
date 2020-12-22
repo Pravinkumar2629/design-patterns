@@ -7,7 +7,11 @@
 
 
 #include "HTMLBuilder.h"
-
+#include "FluentBuilderV2.h"
 int main(){
-	Run();
+	//Run(); //HTML Builder Run();
+
+	FluentBuilderV2 v2;
+	v2.Run();
+
 }

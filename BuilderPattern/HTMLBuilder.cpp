@@ -21,6 +21,7 @@ string close_tag(string name) {
 	return " </" + name + ">";
 }
 
+
 class HTMLElement {
 	string name;
 	string text;
@@ -59,6 +60,7 @@ public:
 	}
 
 };
+
 
 void Run() {
 	HTMLElement builder { "paragraph" };

@@ -6,10 +6,7 @@
  */
 
 #include "FluentBuilder.h"
-
-FluentBuilder::~FluentBuilder() {
-
-}
+#include "HTMLElementV1.h"
 
 #include <iostream>
 #include <string>
@@ -19,72 +16,6 @@ FluentBuilder::~FluentBuilder() {
 
 using namespace std;
 
-inline string open_tag(const string &name) {
-	return string("<" + name + "> ");
-}
-inline string close_tag(const string &name) {
-	return string(" </" + name + ">");
-}
-
-class HTMLBuilder;
-
-class HTMLElement {
-	friend class HTMLBuilder;
-
-private:
-	string name;
-	string text;
-	const size_t indent = 5;
-	vector<HTMLElement> elements;
-
-	HTMLElement(const string &name_) :
-			name(name_), text("") {
-	}
-	HTMLElement(const string &name_, const string &text_) :
-			name(name_), text(text_) {
-	}
-
-public:
-	~HTMLElement() {
-
-	}
-	string str(int indent_size = 1) const {
-		ostringstream oss;
-		cout << open_tag(name) << endl;
-		for (auto &element : elements) {
-			oss << std::setw(indent_size * indent) << " "
-					<< open_tag(element.name) << element.text
-					<< close_tag(element.name) << endl;
-		}
-		oss << close_tag(name) << endl;
-		return oss.str();
-	}
-	static HTMLBuilder create(const string &root_name) {
-		HTMLBuilder builder(root_name);
-		return builder;
-	}
-};
-
-class HTMLBuilder {
-	HTMLElement root;
-public:
-	HTMLBuilder(const string &root_) :
-			root(root_) {
-
-	}
-	HTMLBuilder& add_child(string tag, string text) {
-		HTMLElement element(tag, text);
-		root.elements.emplace_back(element);
-		return *this;
-	}
-	HTMLElement& build() const {
-		return root;
-	}
-	void print_to_console() const {
-		std::cout << root.str(1);
-	}
-
-};
 
 void FluentBuilder::Run() {
 	auto element = HTMLElement::create("paragraph").add_child("text",

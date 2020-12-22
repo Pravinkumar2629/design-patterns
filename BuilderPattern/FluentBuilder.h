@@ -7,11 +7,8 @@
 
 #ifndef FLUENTBUILDER_H_
 #define FLUENTBUILDER_H_
-
-class FluentBuilder {
-public:
+class FluentBuilder{
 	void Run();
-	virtual ~FluentBuilder();
 };
 
 #endif /* FLUENTBUILDER_H_ */
