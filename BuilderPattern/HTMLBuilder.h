@@ -1,15 +1,34 @@
 /*
- * HTMLBuilder.h
+ * HTMLBuilderImpl.h
  *
- *  Created on: Dec 20, 2020
+ *  Created on: Dec 22, 2020
  *      Author: pravinkumar
  */
 
-#ifndef HTMLBUILDER_H_
-#define HTMLBUILDER_H_
 
+#ifndef Element_
+#define Element_
+
+#include "HTMLElementV1.h"
 #include <string>
 
-void Run();
+using namespace std;
+class HTMLElementV1;
 
-#endif /* HTMLBUILDER_H_ */
+class HTMLBuilderImpl {
+	HTMLElementV1 *root;
+public:
+	HTMLBuilderImpl();
+
+	HTMLBuilderImpl(string root_);
+	HTMLBuilderImpl* add_child(string tag, string text);
+
+	operator HTMLElementV1();
+
+	HTMLElementV1& build() const;
+	void print_to_console() const;
+
+	~HTMLBuilderImpl();
+};
+
+#endif
