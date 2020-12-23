@@ -10,5 +10,6 @@
 
 #include <string>
 
+void Run();
 
 #endif /* HTMLBUILDER_H_ */

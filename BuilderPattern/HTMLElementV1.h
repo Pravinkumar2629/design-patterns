@@ -8,29 +8,30 @@
 #ifndef HTMLELEMENTV1_H_
 #define HTMLELEMENTV1_H_
 
-#include <string>
-#include <vector>
 #include "HTMLBuilderImpl.h"
 
-using namespace std;
+#include <string>
+#include <vector>
 
-class HTMLElement {
+using namespace std;
+class HTMLBuilderImpl;
+
+class HTMLElementV1 {
 private:
 	string name;
 	string text;
 	const size_t indent = 5;
-	vector<HTMLElement> elements;
+	vector<HTMLElementV1> elements;
 
-	HTMLElement() ;
-	HTMLElement(const string &name_) ;
-	HTMLElement(const string &name_, const string &text_);
+	HTMLElementV1() ;
+	HTMLElementV1(const string &name_) ;
+	HTMLElementV1(const string &name_, const string &text_);
 
-	friend class HTMLBuilder;
-
+	friend class HTMLBuilderImpl;
 public:
-	~HTMLElement();
+	~HTMLElementV1();
 	string str(int) const ;
-	static HTMLBuilder create(string);
+	static HTMLBuilderImpl* create(string);
 };
 
 #endif /* HTMLELEMENTV1_H_ */

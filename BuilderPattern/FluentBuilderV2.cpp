@@ -8,6 +8,7 @@
 #include "FluentBuilderV2.h"
 
 #include <iostream>
+#include <iomanip>
 #include <string>
 #include <vector>
 #include <sstream>
@@ -19,25 +20,28 @@ public:
 	std::vector<Tag> children;
 	std::vector<std::pair<std::string, std::string>> attributes;
 
-	Tag(const std::string &name_, const std::string &text_) : name(name_), text(text_) {
+	Tag(const std::string &name_, const std::string &text_) :
+			name(name_), text(text_) {
 
 	}
 
-	std::string str() const {
-		std::ostringstream oss;
-
-		oss << "<" << name;
+	std::string str(int indent = 1) const {
+		std::ostringstream oss { };
+		oss << std::setw(indent) << " " << "<" << name;
 		for (const auto &attrib : attributes) {
 			oss << " " << attrib.first << "=" << attrib.second;
 		}
 		if (text.length() == 0 && children.size() == 0) {
-			oss << "/>";
+			oss << " />";
 		} else {
-			oss << ">";
-			for (const auto &child : children) {
-				oss << child.str();
+			oss << ">\n";
+			if (text.length() > 0) {
+				oss << std::setw(indent+1) << " " << text << "\n";
 			}
-			oss << "</" << name << ">";
+			for (const auto &child : children) {
+				oss << std::setw(indent+1) << " " << child.str(indent + 1);
+			}
+			oss << "\n" << std::setw(indent) << " " << "</" << name << ">";
 		}
 		return oss.str();
 	}
@@ -45,12 +49,12 @@ public:
 
 class P: public Tag {
 public:
-	P(const std::string &text) :
-			Tag { "P", text } {
+	P(const std::string &_text) :
+			Tag { "P", _text } {
 
 	}
-	P(const std::string &text, const Tag &child) :
-			Tag { "P", text } {
+	P(const std::string &_text, const Tag &child) :
+			Tag { "P", _text } {
 		children.emplace_back(child);
 	}
 };
@@ -58,11 +62,11 @@ public:
 class IMG: public Tag {
 public:
 	IMG(const std::string &url) :
-			Tag { "IMG", text } {
-
+			Tag { "IMG", "" } {
+		attributes.emplace_back(std::make_pair("src", url));
 	}
 	IMG(const std::string &url, const Tag &child) :
-			Tag { "IMG", text } {
+			Tag { "IMG", "" } {
 		children.emplace_back(child);
 		attributes.emplace_back(std::make_pair("src", url));
 	}

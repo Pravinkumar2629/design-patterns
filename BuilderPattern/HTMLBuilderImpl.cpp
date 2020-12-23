@@ -6,28 +6,31 @@
  */
 
 #include "HTMLBuilderImpl.h"
-#include "HTMLElementV1.h"
 #include <iostream>
 
-HTMLBuilder::HTMLBuilder() {
+HTMLBuilderImpl::~HTMLBuilderImpl() {
+	delete root;
 }
 
-HTMLBuilder::HTMLBuilder(string root_) {
-	root.name = root_;
-}
-HTMLBuilder& HTMLBuilder::add_child(string tag, string text) {
-	HTMLElement element(tag, text);
-	root.elements.emplace_back(element);
-	return *this;
+HTMLBuilderImpl::HTMLBuilderImpl() : HTMLBuilderImpl("")  {
 }
 
-HTMLBuilder::operator HTMLElement() {
-	return root;
+HTMLBuilderImpl::HTMLBuilderImpl(string root_) {
+	root = new HTMLElementV1(root_);
+}
+HTMLBuilderImpl* HTMLBuilderImpl::add_child(string tag, string text) {
+	HTMLElementV1 element(tag, text);
+	root->elements.emplace_back(element);
+	return this;
 }
 
-HTMLElement HTMLBuilder::build() const {
-	return root;
+HTMLBuilderImpl::operator HTMLElementV1() {
+	return *root;
 }
-void HTMLBuilder::print_to_console() const {
-	std::cout << root.str(1);
+
+HTMLElementV1& HTMLBuilderImpl::build() const {
+	return *root;
+}
+void HTMLBuilderImpl::print_to_console() const {
+	//std::cout << root.str(1);
 }

@@ -6,44 +6,49 @@
  */
 
 #include "HTMLElementV1.h"
+
 #include <iostream>
+#include <iomanip>
+
 using namespace std;
-string open_tag(string &name) {
-	return string("<" + name + "> ");
-}
-string close_tag(string &name) {
-	return string(" </" + name + ">");
+
+
+
+HTMLElementV1::HTMLElementV1() {
 }
 
-HTMLElement::HTMLElement() {
-}
-
-HTMLElement::HTMLElement(const string &name_) :
+HTMLElementV1::HTMLElementV1(const string &name_) :
 		name(name_), text("") {
 }
-HTMLElement::HTMLElement(const string &name_, const string &text_) :
+HTMLElementV1::HTMLElementV1(const string &name_, const string &text_) :
 		name(name_), text(text_) {
 }
 
-HTMLElement::~HTMLElement() {
+HTMLElementV1::~HTMLElementV1() {
 
 }
 
-string HTMLElement::str(int indent_size) const {
+string HTMLElementV1::str(int indent_size) const {
 	ostringstream oss;
-	cout << open_tag(name) << endl;
+	cout << "<" << name << ">" << endl;
 	for (auto &element : elements) {
-		oss << std::setw(indent_size * indent) << " " << open_tag(element.name)
-				<< element.text << close_tag(element.name) << endl;
+		oss << std::setw(indent_size * indent) << " " << "<" << element.name
+				<< ">" << element.text << "</" << element.name << ">" << endl;
 	}
-	oss << close_tag(name) << endl;
+	oss <<"</" <<name << ">"<< endl;
 	return oss.str();
 }
-HTMLBuilder HTMLElement::create(string root_name) {
-	return {root_name};
+
+
+HTMLBuilderImpl* HTMLElementV1::create(string root_name) {
+	return new HTMLBuilderImpl(root_name);
 }
 
-HTMLElementV1::~HTMLElementV1() {
-	// TODO Auto-generated destructor stub
-}
 
+
+//string open_tag(string &name) {
+//	return string("<" + name + "> ");
+//}
+//string close_tag(string &name) {
+//	return string(" </" + name + ">");
+//}

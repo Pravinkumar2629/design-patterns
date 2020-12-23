@@ -18,8 +18,11 @@ using namespace std;
 
 
 void FluentBuilder::Run() {
-	auto element = HTMLElement::create("paragraph").add_child("text",
-			"text One").add_child("text", "text two").add_child("text",
-			"text three").add_child("text", "text four").build();
-	std::cout << element.str();
+	auto element = HTMLElementV1::create("paragraph")
+			->add_child("text", "text One")
+			->add_child("text", "text two")
+			->add_child("text",	"text three")
+			->add_child("text", "text four")
+			->build();
+	std::cout << element.str(1);
 }

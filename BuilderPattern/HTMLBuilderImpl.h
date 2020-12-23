@@ -6,22 +6,29 @@
  */
 
 
-#include <string>
+#ifndef Element_
+#define Element_
+
 #include "HTMLElementV1.h"
+#include <string>
 
 using namespace std;
-class HTMLElement;
+class HTMLElementV1;
 
-class HTMLBuilder {
-	HTMLElement root;
+class HTMLBuilderImpl {
+	HTMLElementV1 *root;
 public:
-	HTMLBuilder();
+	HTMLBuilderImpl();
 
-	HTMLBuilder(string root_);
-	HTMLBuilder& add_child(string tag, string text);
+	HTMLBuilderImpl(string root_);
+	HTMLBuilderImpl* add_child(string tag, string text);
 
-	operator HTMLElement();
+	operator HTMLElementV1();
 
-	HTMLElement build() const;
+	HTMLElementV1& build() const;
 	void print_to_console() const;
+
+	~HTMLBuilderImpl();
 };
+
+#endif
