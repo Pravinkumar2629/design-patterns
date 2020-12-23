@@ -1,11 +1,11 @@
 /*
- * HTMLElementV1.cpp
+ * HTMLElement.cpp
  *
  *  Created on: Dec 22, 2020
  *      Author: pravinkumar
  */
 
-#include "HTMLElementV1.h"
+#include "HTMLElement.h"
 
 #include <iostream>
 #include <iomanip>
@@ -14,21 +14,21 @@ using namespace std;
 
 
 
-HTMLElementV1::HTMLElementV1() {
+HTMLElement::HTMLElement() {
 }
 
-HTMLElementV1::HTMLElementV1(const string &name_) :
+HTMLElement::HTMLElement(const string &name_) :
 		name(name_), text("") {
 }
-HTMLElementV1::HTMLElementV1(const string &name_, const string &text_) :
+HTMLElement::HTMLElement(const string &name_, const string &text_) :
 		name(name_), text(text_) {
 }
 
-HTMLElementV1::~HTMLElementV1() {
+HTMLElement::~HTMLElement() {
 
 }
 
-string HTMLElementV1::str(int indent_size) const {
+string HTMLElement::str(int indent_size) const {
 	ostringstream oss;
 	cout << "<" << name << ">" << endl;
 	for (auto &element : elements) {
@@ -40,8 +40,8 @@ string HTMLElementV1::str(int indent_size) const {
 }
 
 
-HTMLBuilderImpl* HTMLElementV1::create(string root_name) {
-	return new HTMLBuilderImpl(root_name);
+HTMLBuilder* HTMLElement::create(string root_name) {
+	return new HTMLBuilder(root_name);
 }
 
 

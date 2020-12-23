@@ -1,36 +1,37 @@
 /*
- * HTMLBuilderImpl.cpp
+ * HTMLBuilder.cpp
  *
  *  Created on: Dec 22, 2020
  *      Author: pravinkumar
  */
 
-#include "HTMLBuilderImpl.h"
+#include "HTMLBuilder.h"
+
 #include <iostream>
 
-HTMLBuilderImpl::~HTMLBuilderImpl() {
+HTMLBuilder::~HTMLBuilder() {
 	delete root;
 }
 
-HTMLBuilderImpl::HTMLBuilderImpl() : HTMLBuilderImpl("")  {
+HTMLBuilder::HTMLBuilder() : HTMLBuilder("")  {
 }
 
-HTMLBuilderImpl::HTMLBuilderImpl(string root_) {
-	root = new HTMLElementV1(root_);
+HTMLBuilder::HTMLBuilder(string root_) {
+	root = new HTMLElement(root_);
 }
-HTMLBuilderImpl* HTMLBuilderImpl::add_child(string tag, string text) {
-	HTMLElementV1 element(tag, text);
+HTMLBuilder* HTMLBuilder::add_child(string tag, string text) {
+	HTMLElement element(tag, text);
 	root->elements.emplace_back(element);
 	return this;
 }
 
-HTMLBuilderImpl::operator HTMLElementV1() {
+HTMLBuilder::operator HTMLElement() {
 	return *root;
 }
 
-HTMLElementV1& HTMLBuilderImpl::build() const {
+HTMLElement& HTMLBuilder::build() const {
 	return *root;
 }
-void HTMLBuilderImpl::print_to_console() const {
+void HTMLBuilder::print_to_console() const {
 	//std::cout << root.str(1);
 }

@@ -5,7 +5,7 @@
  *      Author: pravinkumar
  */
 
-#include "HTMLBuilder.h"
+#include "WithBuilder.h"
 
 #include <iostream>
 #include <string>
@@ -22,18 +22,18 @@ string close_tag(string name) {
 }
 
 
-class HTMLElement {
+class HTMLElementWithBuilder {
 	string name;
 	string text;
 	const size_t indent = 5;
 
 public:
-	vector<HTMLElement> elements;
-	HTMLElement(const string &name_) :
+	vector<HTMLElementWithBuilder> elements;
+	HTMLElementWithBuilder(const string &name_) :
 			name(name_), text("") {
 	}
 
-	HTMLElement(const string &name_, const string &text_) :
+	HTMLElementWithBuilder(const string &name_, const string &text_) :
 			name(name_), text(text_) {
 	}
 
@@ -49,13 +49,13 @@ public:
 		return oss.str();
 	}
 	void add_child(string tag, string text) {
-		HTMLElement element(tag, text);
+		HTMLElementWithBuilder element(tag, text);
 		elements.emplace_back(element);
 	}
 	void Print() {
 		std::cout << str(1);
 	}
-	~HTMLElement() {
+	~HTMLElementWithBuilder() {
 
 	}
 
@@ -63,7 +63,7 @@ public:
 
 
 void Run() {
-	HTMLElement builder { "paragraph" };
+	HTMLElementWithBuilder builder { "paragraph" };
 	builder.add_child("text", "text One");
 	builder.add_child("text", "text two");
 	builder.add_child("text", "text three");
