@@ -1,15 +1,20 @@
 /*
  * PersonJobBuilder.cpp
  *
- *  Created on: Dec 25, 2020
+ *  Created on: Dec 26, 2020
  *      Author: pravinkumar
  */
 
 #include "PersonJobBuilder.h"
+#include "PersonBase.h"
+#include "Person.h"
+
+PersonJobBuilder::PersonJobBuilder(Person &person_) : PersonBase(person_){}
 
 
-template<typename T>
-PersonJobBuilder<T>& PersonJobBuilder<T>::as(const std::string &designation) {
-	P().setWorksAs(designation);
+PersonJobBuilder& PersonJobBuilder::as(const std::string &desingation){
+	_person.designation = desingation;
 	return *this;
 }
+
+

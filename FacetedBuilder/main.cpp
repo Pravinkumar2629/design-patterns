@@ -23,6 +23,21 @@
  * 	idea. is to have a group of builders which are exposed by Person class to provide various build methods;
  * *
  * */
-int main(){
 
+#include <iostream>
+#include <memory>
+#include <string>
+
+#include "PersonBuilderV2.h"
+
+int main() {
+	auto person = Person::create()
+			.named("Pravin")
+			.lives()
+				.in("Sirkazhi")
+			.works()
+				.as("Software Developer")
+			.build();
+	std::cout <<  person.str();
+	return 0;
 }

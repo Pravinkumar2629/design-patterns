@@ -1,17 +1,18 @@
 /*
  * PersonAddressBuilder.cpp
  *
- *  Created on: Dec 25, 2020
+ *  Created on: Dec 26, 2020
  *      Author: pravinkumar
  */
 
-
-//
 #include "PersonAddressBuilder.h"
+#include "Person.h"
 
+PersonAddressBuilder::PersonAddressBuilder(Person &person_) :
+		PersonBase(person_) {
+}
 
-template<typename T>
-PersonAddressBuilder<T>& PersonAddressBuilder<T>::in(const std::string &area) {
-	P().setAddress(area);
+PersonAddressBuilder& PersonAddressBuilder::in(const std::string &city) {
+	_person.city = city;
 	return *this;
 }
