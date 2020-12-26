@@ -1,11 +1,11 @@
-<mxfile host="app.diagrams.net" modified="2020-12-26T10:43:36.680Z" agent="5.0 (X11)" etag="D6wlWVfuLAkRKm-pgSDq" version="14.1.2" type="github">
+<mxfile host="app.diagrams.net" modified="2020-12-26T10:46:23.342Z" agent="5.0 (X11)" etag="KCyqJLIY5lI7dcRq6YXP" version="14.1.2" type="github">
   <diagram id="x5gHuUsIIJ-AkQ3tlWG3" name="Page-1">
     <mxGraphModel dx="1695" dy="592" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" background="#EEEEEE" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
         <mxCell id="iUWRhTmWpU_0zO2Lu-_L-1" value="Person&#xa;" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;fillColor=#F5AB50;strokeColor=#909090;fontColor=#1A1A1A;" parent="1" vertex="1">
-          <mxGeometry x="581" y="15" width="203" height="164" as="geometry" />
+          <mxGeometry x="609" y="23" width="203" height="164" as="geometry" />
         </mxCell>
         <mxCell id="F8Ell9N0lwPQoOebZS9d-1" value="- worksAs: string" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontColor=#1A1A1A;" vertex="1" parent="iUWRhTmWpU_0zO2Lu-_L-1">
           <mxGeometry y="26" width="203" height="26" as="geometry" />
@@ -27,16 +27,6 @@
         </mxCell>
         <mxCell id="uwW9TZI5FmVvOkZDhSwe-2" value="&lt;div&gt;Idea is to have a person builder which covers various sub task of constructions&lt;/div&gt;&lt;div&gt;Say, Construction of Address, Job details, etc.&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;fontColor=#1A1A1A;" parent="1" vertex="1">
           <mxGeometry x="5" y="9" width="426" height="46" as="geometry" />
-        </mxCell>
-        <mxCell id="uwW9TZI5FmVvOkZDhSwe-42" style="edgeStyle=orthogonalEdgeStyle;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;strokeColor=#182E3E;fontColor=#1A1A1A;labelBackgroundColor=#EEEEEE;" parent="1" source="uwW9TZI5FmVvOkZDhSwe-9" edge="1">
-          <mxGeometry relative="1" as="geometry">
-            <Array as="points">
-              <mxPoint x="394" y="208" />
-              <mxPoint x="394" y="84" />
-              <mxPoint x="581" y="84" />
-            </Array>
-            <mxPoint x="581" y="158" as="targetPoint" />
-          </mxGeometry>
         </mxCell>
         <mxCell id="uwW9TZI5FmVvOkZDhSwe-43" style="edgeStyle=orthogonalEdgeStyle;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.75;entryY=0;entryDx=0;entryDy=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;strokeColor=#182E3E;fontColor=#1A1A1A;labelBackgroundColor=#EEEEEE;" parent="1" source="uwW9TZI5FmVvOkZDhSwe-9" target="uwW9TZI5FmVvOkZDhSwe-20" edge="1">
           <mxGeometry relative="1" as="geometry">
@@ -73,28 +63,34 @@
           <mxGeometry y="112" width="273" height="26" as="geometry" />
         </mxCell>
         <mxCell id="uwW9TZI5FmVvOkZDhSwe-20" value="PersonJobBuilder" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;fillColor=#F5AB50;strokeColor=#909090;fontColor=#1A1A1A;" parent="1" vertex="1">
-          <mxGeometry x="116" y="341" width="273" height="86" as="geometry" />
+          <mxGeometry x="116" y="341" width="273" height="112" as="geometry" />
+        </mxCell>
+        <mxCell id="uwW9TZI5FmVvOkZDhSwe-23" value="+ Ctor( ref person) : PersonBuilderBase(person)" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontColor=#1A1A1A;" parent="uwW9TZI5FmVvOkZDhSwe-20" vertex="1">
+          <mxGeometry y="26" width="273" height="26" as="geometry" />
         </mxCell>
         <mxCell id="uwW9TZI5FmVvOkZDhSwe-22" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=#909090;fontColor=#1A1A1A;labelBackgroundColor=#EEEEEE;" parent="uwW9TZI5FmVvOkZDhSwe-20" vertex="1">
-          <mxGeometry y="26" width="273" height="8" as="geometry" />
-        </mxCell>
-        <mxCell id="uwW9TZI5FmVvOkZDhSwe-23" value="+ as(string): PersonJobBuilder" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontColor=#1A1A1A;" parent="uwW9TZI5FmVvOkZDhSwe-20" vertex="1">
-          <mxGeometry y="34" width="273" height="26" as="geometry" />
+          <mxGeometry y="52" width="273" height="8" as="geometry" />
         </mxCell>
         <mxCell id="F8Ell9N0lwPQoOebZS9d-8" value="+ etc,. you may want to add more" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontColor=#1A1A1A;" vertex="1" parent="uwW9TZI5FmVvOkZDhSwe-20">
           <mxGeometry y="60" width="273" height="26" as="geometry" />
         </mxCell>
+        <mxCell id="F8Ell9N0lwPQoOebZS9d-18" value="+ as(string): PersonJobBuilder" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontColor=#1A1A1A;" vertex="1" parent="uwW9TZI5FmVvOkZDhSwe-20">
+          <mxGeometry y="86" width="273" height="26" as="geometry" />
+        </mxCell>
         <mxCell id="uwW9TZI5FmVvOkZDhSwe-26" value="PersonAddressBuilder" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;fillColor=#F5AB50;strokeColor=#909090;fontColor=#1A1A1A;" parent="1" vertex="1">
-          <mxGeometry x="543" y="319" width="273" height="86" as="geometry" />
+          <mxGeometry x="543" y="319" width="273" height="112" as="geometry" />
+        </mxCell>
+        <mxCell id="F8Ell9N0lwPQoOebZS9d-19" value="+ Ctor( ref person) : PersonBuilderBase(person)" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontColor=#1A1A1A;" vertex="1" parent="uwW9TZI5FmVvOkZDhSwe-26">
+          <mxGeometry y="26" width="273" height="26" as="geometry" />
         </mxCell>
         <mxCell id="uwW9TZI5FmVvOkZDhSwe-28" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;strokeColor=#909090;fontColor=#1A1A1A;labelBackgroundColor=#EEEEEE;" parent="uwW9TZI5FmVvOkZDhSwe-26" vertex="1">
-          <mxGeometry y="26" width="273" height="8" as="geometry" />
+          <mxGeometry y="52" width="273" height="8" as="geometry" />
         </mxCell>
         <mxCell id="uwW9TZI5FmVvOkZDhSwe-29" value="+ in(string): PersonAddressBuilder" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontColor=#1A1A1A;" parent="uwW9TZI5FmVvOkZDhSwe-26" vertex="1">
-          <mxGeometry y="34" width="273" height="26" as="geometry" />
+          <mxGeometry y="60" width="273" height="26" as="geometry" />
         </mxCell>
         <mxCell id="F8Ell9N0lwPQoOebZS9d-9" value="+ etc,. you may want to add more" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;fontColor=#1A1A1A;" vertex="1" parent="uwW9TZI5FmVvOkZDhSwe-26">
-          <mxGeometry y="60" width="273" height="26" as="geometry" />
+          <mxGeometry y="86" width="273" height="26" as="geometry" />
         </mxCell>
         <mxCell id="F8Ell9N0lwPQoOebZS9d-2" value="PersonBuilder" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;fillColor=#F5AB50;strokeColor=#909090;fontColor=#1A1A1A;" vertex="1" parent="1">
           <mxGeometry x="-4" y="122" width="197" height="138" as="geometry" />
@@ -127,6 +123,12 @@
         </mxCell>
         <mxCell id="F8Ell9N0lwPQoOebZS9d-15" value="inherits" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;sketch=0;fontColor=#1A1A1A;" vertex="1" parent="1">
           <mxGeometry x="208" y="174" width="40" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="F8Ell9N0lwPQoOebZS9d-20" value="invokes to create" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="508" y="97" width="106" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="F8Ell9N0lwPQoOebZS9d-23" style="edgeStyle=orthogonalEdgeStyle;curved=0;rounded=1;sketch=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.993;entryY=-0.115;entryDx=0;entryDy=0;entryPerimeter=0;strokeColor=#182E3E;fontColor=#1A1A1A;" edge="1" parent="1" source="iUWRhTmWpU_0zO2Lu-_L-4" target="uwW9TZI5FmVvOkZDhSwe-10">
+          <mxGeometry relative="1" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
