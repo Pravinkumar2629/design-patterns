@@ -9,63 +9,77 @@
 #include  <sstream>
 #include <fstream>
 
-
-struct StreamBase{
+struct StreamBase {
 	std::ofstream ostream;
 	std::ifstream istream;
 
-	StreamBase(): StreamBase("default.dax"){}
+	StreamBase() :
+			StreamBase("default.dax") {
+	}
 	StreamBase(const std::string &streamname) :
-		ostream(streamname, std::fstream::out | std::fstream::binary | std::fstream::app)
-		,istream(streamname,  std::fstream::in |std::fstream::binary)
-	{}
-	template <typename T>
-	virtual StreamBase& operator << (T&& val){
+			ostream(streamname,
+					std::fstream::out | std::fstream::binary
+							| std::fstream::app), istream(streamname,
+					std::fstream::in | std::fstream::binary) {
+	}
+	template<typename T>
+	virtual StreamBase& operator <<(T &&val) {
 		ostream << val << std::endl;
 		return *this;
 	}
 
-	virtual ~StreamBase(){};
+	virtual ~StreamBase() {
+	}
+	;
 };
 
+struct Serializer {
+	std::ostringstream oss;
+	template<typename T>
+	Serializer& operator <<(T &&val, int length) {
+		oss << "{ value : " << val << ", size : " << length << "}";
+		return *this;
+	}
+	template<typename T>
+	Serializer& operator <<(T &&val) {
+		oss << "{ value : " << val << "}";
+		return *this;
+	}
+};
 
-struct Serializable{
-	StreamBase stream;
+struct Serializable {
+	Serializer stream;
 	virtual std::string Serialize() = 0;
 	virtual std::string Deserialize() = 0;
-	virtual ~Serializable(){};
+	virtual ~Serializable() {
+	}
+	;
 };
 
-class CustomerDetails : Serializable{
+class CustomerDetails: Serializable {
 	std::string mobile;
 	std::string email;
-	~CustomerDetails(){}
-
-	std::string Serialize(){
-		std::ostringstream oss;
-
-		oss << mobile << email;
-		return oss.str();
+	~CustomerDetails() {
+	}
+	Serializer& Serialize() {
+		stream << mobile << email;
+		return stream;
 	}
 };
 
-class Account : Serializable{
+class Account: Serializable {
 	std::string name;
 	std::string type;
-	int id ;
+	int id;
 	CustomerDetails *details;
 
-	void Serialize(){
-
+	Serializer& Serialize() {
+		stream << name << type ;
+		return stream;
 	}
-
 };
 
-
-int main(){
+int main() {
 
 }
-
-
-
 
