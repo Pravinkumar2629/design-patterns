@@ -43,6 +43,7 @@ class CustomerDetails : Serializable{
 		std::ostringstream oss;
 
 		oss << mobile << email;
+		return oss.str();
 	}
 };
 
