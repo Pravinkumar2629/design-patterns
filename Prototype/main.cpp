@@ -24,6 +24,8 @@ struct StreamBase{
 		ostream << val << std::endl;
 		return *this;
 	}
+
+	virtual ~StreamBase(){};
 };
 
 
