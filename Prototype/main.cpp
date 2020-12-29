@@ -30,7 +30,6 @@ struct StreamBase {
 
 	virtual ~StreamBase() {
 	}
-	;
 };
 
 struct Serializer {
@@ -53,7 +52,6 @@ struct Serializable {
 	virtual std::string Deserialize() = 0;
 	virtual ~Serializable() {
 	}
-	;
 };
 
 class CustomerDetails: Serializable {
@@ -74,7 +72,7 @@ class Account: Serializable {
 	CustomerDetails *details;
 
 	Serializer& Serialize() {
-		stream << name << type ;
+		stream << name << type << id << details->Serializable();
 		return stream;
 	}
 };
