@@ -23,7 +23,7 @@ struct StreamBase {
 					std::fstream::in | std::fstream::binary) {
 	}
 	template<typename T>
-	virtual StreamBase& operator <<(T &&val) {
+	StreamBase& operator <<(T &&val) {
 		ostream << val << std::endl;
 		return *this;
 	}
@@ -35,21 +35,28 @@ struct StreamBase {
 struct Serializer {
 	std::ostringstream oss;
 	template<typename T>
-	Serializer& operator <<(T &&val, int length) {
-		oss << "{ value : " << val << ", size : " << length << "}";
+	Serializer& operator <<(const std::string &str) {
+		oss << "{ value : " << str.c_str() << ", size : " << str.size() << "};";
 		return *this;
 	}
 	template<typename T>
 	Serializer& operator <<(T &&val) {
-		oss << "{ value : " << val << "}";
+		oss << "{ value : " << val << "};";
 		return *this;
+	}
+	template<typename T>
+	Serializer& operator >>(T &&val) {
+		oss << "{ value : " << val << "};";
+		return *this;
+	}
+	std::string to_string(){
+		return oss.str();
 	}
 };
 
 struct Serializable {
 	Serializer stream;
-	virtual std::string Serialize() = 0;
-	virtual std::string Deserialize() = 0;
+	virtual Serializer& Serialize() = 0;
 	virtual ~Serializable() {
 	}
 };
@@ -57,6 +64,10 @@ struct Serializable {
 class CustomerDetails: Serializable {
 	std::string mobile;
 	std::string email;
+public:
+	CustomerDetails(const std::string &email_, const std::string &mobile_) :
+			mobile(mobile_), email(email_) {
+	}
 	~CustomerDetails() {
 	}
 	Serializer& Serialize() {
@@ -70,14 +81,21 @@ class Account: Serializable {
 	std::string type;
 	int id;
 	CustomerDetails *details;
-
+public:
+	Account(const std::string &name_, const std::string &type_, int id_,
+			const std::string &email_, const std::string &mobile_) :
+			name(name_), type(type_), id(id_), details(
+					new CustomerDetails(email_, mobile_)) {
+	}
 	Serializer& Serialize() {
-		stream << name << type << id << details->Serializable();
+		stream << name << type << id << details->Serialize().to_string();
 		return stream;
 	}
 };
 
 int main() {
-
+	Account a("Noname", "savings", 12, "sample@gmail.com", "9789671990");
+	StreamBase base;
+	base << a.Serialize().to_string();
 }
 
