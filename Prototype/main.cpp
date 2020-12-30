@@ -91,7 +91,6 @@ struct Serializable {
 	virtual ~Serializable() {
 	}
 };
-
 class CustomerDetails: Serializable {
 	std::string mobile;
 	std::string email;
