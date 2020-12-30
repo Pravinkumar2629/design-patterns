@@ -6,7 +6,7 @@
  */
 
 #include <string>
-#include  <sstream>
+#include <sstream>
 #include <fstream>
 
 struct StreamBase {
@@ -17,15 +17,17 @@ struct StreamBase {
 			StreamBase("default.dax") {
 	}
 	StreamBase(const std::string &streamname) :
-			ostream(streamname,
-					std::fstream::out | std::fstream::binary
-							| std::fstream::app), istream(streamname,
-					std::fstream::in | std::fstream::binary) {
+			ostream(streamname, std::fstream::out | std::fstream::binary), istream(
+					streamname, std::fstream::in | std::fstream::binary) {
 	}
 	template<typename T>
 	StreamBase& operator <<(T &&val) {
 		ostream << val << std::endl;
 		return *this;
+	}
+
+	void next(std::string &buff, char delim) {
+		std::getline(istream, buff, delim);
 	}
 
 	virtual ~StreamBase() {
@@ -34,23 +36,52 @@ struct StreamBase {
 
 struct Serializer {
 	std::ostringstream oss;
-	template<typename T>
-	Serializer& operator <<(const std::string &str) {
-		oss << "{ value : " << str.c_str() << ", size : " << str.size() << "};";
-		return *this;
-	}
+
 	template<typename T>
 	Serializer& operator <<(T &&val) {
-		oss << "{ value : " << val << "};";
+		oss << "value:" << val << ";";
 		return *this;
 	}
+
 	template<typename T>
-	Serializer& operator >>(T &&val) {
-		oss << "{ value : " << val << "};";
+	Serializer& operator >>(T &val) {
+		oss << "value: " << val << ";";
 		return *this;
 	}
-	std::string to_string(){
+
+	std::string to_string() {
 		return oss.str();
+	}
+};
+
+template<>
+Serializer& Serializer::operator << <const std::string&>(
+		const std::string &str) {
+	oss << "value:" << str.c_str() << ";";
+	return *this;
+}
+
+struct Deserializer {
+	StreamBase &base;
+	Deserializer(StreamBase &base_) :
+			base(base_) {
+	}
+
+	template<typename T>
+	Deserializer& operator >>(T &val) {
+		std::string buff;
+		base.next(buff, ';');
+		std::string value = buff.substr(buff.find("value:"), buff.size());
+		switch (typeid(val))
+		{
+			case typeid(int):
+				val = std::stoi(value);
+				break;
+			default:
+				val = value;
+				break;
+		}
+		return *this;
 	}
 };
 
@@ -94,7 +125,7 @@ public:
 };
 
 int main() {
-	Account a("Noname", "savings", 12, "sample@gmail.com", "9789671990");
+	Account a("account_name", "savings", 12, "sample@gmail.com", "9749571990");
 	StreamBase base;
 	base << a.Serialize().to_string();
 }
