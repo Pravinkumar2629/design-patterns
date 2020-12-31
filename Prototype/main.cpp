@@ -5,6 +5,7 @@
  *      Author: pravinkumar
  */
 
+#include <iostream>
 #include <string>
 #include <sstream>
 #include <fstream>
@@ -71,15 +72,11 @@ struct Deserializer {
 	Deserializer& operator >>(T &val) {
 		std::string buff;
 		base.next(buff, ';');
-		std::string value = buff.substr(buff.find("value:"), buff.size());
-		switch (typeid(val))
-		{
-			case typeid(int):
-				val = std::stoi(value);
-				break;
-			default:
-				val = value;
-				break;
+		std::string value = buff.substr(buff.find("value:") + 6, buff.size());
+		if (typeid(val) == typeid(int)) {
+			val = std::stoi(value);
+		} else {
+			val = value;
 		}
 		return *this;
 	}
@@ -91,10 +88,12 @@ struct Serializable {
 	virtual ~Serializable() {
 	}
 };
+
 class CustomerDetails: Serializable {
+public:
 	std::string mobile;
 	std::string email;
-public:
+
 	CustomerDetails(const std::string &email_, const std::string &mobile_) :
 			mobile(mobile_), email(email_) {
 	}
@@ -107,25 +106,29 @@ public:
 };
 
 class Account: Serializable {
+public:
 	std::string name;
 	std::string type;
-	int id;
 	CustomerDetails *details;
-public:
-	Account(const std::string &name_, const std::string &type_, int id_,
+
+	Account(const std::string &name_, const std::string &type_,
 			const std::string &email_, const std::string &mobile_) :
-			name(name_), type(type_), id(id_), details(
+			name(name_), type(type_), details(
 					new CustomerDetails(email_, mobile_)) {
 	}
 	Serializer& Serialize() {
-		stream << name << type << id << details->Serialize().to_string();
+		stream << name << type << details->Serialize().to_string();
 		return stream;
 	}
 };
 
 int main() {
-	Account a("account_name", "savings", 12, "sample@gmail.com", "9749571990");
+	Account a("account_name", "savings", "sample@gmail.com", "9749571990");
 	StreamBase base;
 	base << a.Serialize().to_string();
+	Deserializer d(base);
+	Account b("", "", "", "");
+	d >> b.name >> b.type >> b.details->mobile >> b.details->email;
+	std::cout << b.Serialize().to_string() << std::endl;
 }
 
