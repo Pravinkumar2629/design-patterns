@@ -10,6 +10,8 @@
 #include <sstream>
 #include <fstream>
 
+#include "Prototype.h"
+
 struct StreamBase {
 	std::ofstream ostream;
 	std::ifstream istream;
@@ -130,5 +132,8 @@ int main() {
 	Account b("", "", "", "");
 	d >> b.name >> b.type >> b.details->mobile >> b.details->email;
 	std::cout << b.Serialize().to_string() << std::endl;
+
+
+	clone_functions();
 }
 
