@@ -11,6 +11,7 @@
 #include <fstream>
 #include <cstdlib>
 #include <vector>
+#include <boost/lexical_cast.hpp>
 
 class Database {
 public:
@@ -28,7 +29,8 @@ class SingletonDatabase: public Database {
 		std::string name, population;
 		while (std::getline(fs, name)) {
 			std::getline(fs, population);
-			mapp.insert(std::make_pair(name, std::stoi(population)));
+			//mapp.insert(std::make_pair(name, std::stoi(population)));
+			mapp.insert(std::make_pair(name, boost::lexical_cast<int>(population)));
 		}
 	}
 
@@ -51,6 +53,11 @@ public:
 	}
 
 };
+
+/*
+ * Just comments
+ *
+ * */
 
 SingletonDatabase SingletonDatabase::instance { };
 
